@@ -1,8 +1,12 @@
 package com.example.crudapi.controllers;
 
 import com.example.crudapi.dao.IUserDao;
+import com.example.crudapi.dto.UserDTO;
 import com.example.crudapi.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +18,9 @@ public class UserController {
     private IUserDao iUserDao;
 
     @RequestMapping(value = "api/users", method = RequestMethod.GET)
-    public List<UserModel> getUsers(){
-
-        return iUserDao.getAllUsers();
-    } // trae todos los usuarios de la DB
+    public ResponseEntity<List<UserDTO>> getUsers(){
+        return new ResponseEntity<>(iUserDao.getAllUsers(), HttpStatus.OK) ;
+    }
 
     @RequestMapping(value = "api/users/{id}", method = RequestMethod.GET)
     public UserModel getAnUserById(@PathVariable Long id){
@@ -38,5 +41,17 @@ public class UserController {
     public boolean deleteById(@PathVariable Long id){
         return iUserDao.deleteAnUserById(id);
     } // elimina un usuario por ID de la DB
+
+    @RequestMapping(value = "api/users/login", method = RequestMethod.POST)
+    public ResponseEntity<UserModel> login(@RequestBody UserModel userModel) {
+        UserModel loggedInUser = iUserDao.login(userModel);
+
+        if (loggedInUser != null) {
+            return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    } // login por user y password
+
 
 }

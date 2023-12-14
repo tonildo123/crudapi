@@ -47,7 +47,6 @@ public class UserModel {
         return "UserModel{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 
@@ -63,3 +62,24 @@ public class UserModel {
         return Objects.hash(getId(), getEmail(), getPassword());
     }
 }
+
+/*
+* Implementar la Validación de Datos:
+
+Asegúrate de agregar validaciones adecuadas para los datos de entrada. Puedes usar anotaciones de validación, como @NotNull, @NotBlank, @Email, etc., según tus requisitos.
+Implementar la Paginación y Ordenación:
+
+Si esperas tener grandes cantidades de datos, considera agregar paginación y ordenación a tus endpoints para mejorar la eficiencia y la usabilidad.
+Añadir Seguridad:
+
+Implementa la seguridad en tu aplicación. Puedes usar Spring Security para gestionar la autenticación y la autorización.
+Documentar tu API:
+
+Utiliza herramientas como Swagger o Springdoc para documentar tu API de manera clara y proporcionar una referencia fácil de usar para los consumidores de la API.
+Manejar Excepciones de Manera Adecuada:
+
+Implementa el manejo adecuado de excepciones para proporcionar respuestas significativas en caso de errores.
+Agregar Pruebas Unitarias e Integración:
+
+Desarrolla y ejecuta pruebas unitarias e integración para garantizar la calidad y la robustez de tu aplicación.
+Implementar Auditoría: */
